@@ -10,30 +10,31 @@ dependencias: se sirve la carpeta tal cual.
 | `app-ads.txt` | lo que AdMob busca para confirmar que los bloques de anuncios son tuyos |
 | iconos | favicon y pantalla de inicio |
 
-## Por que un subdominio y no GitHub Pages
+## Desplegar (GitHub Pages)
 
-`app-ads.txt` tiene que estar en la **raiz del dominio** que declares como web
-del desarrollador en las tiendas. GitHub Pages sirve los repos de proyecto en
-`usuario.github.io/repo/`, que no es una raiz, asi que AdMob no lo encontraria
-y cobrarias bastante menos.
+En el repositorio: **Settings → Pages → Source: Deploy from a branch**, rama
+`main`, carpeta `/ (root)`. Guardar. En un par de minutos queda en:
 
-Con un subdominio propio las dos cosas quedan bien:
+- `https://guillehr2.github.io/untangled-web/`
+- `https://guillehr2.github.io/untangled-web/privacidad.html`
 
-- `https://untangled.guillemhermidarivera.com/privacidad.html`
-- `https://untangled.guillemhermidarivera.com/app-ads.txt`
+Esa segunda es la que va en App Store Connect y en la ficha de Google Play.
 
-## Desplegar
+## El `app-ads.txt` es el unico que necesita otra cosa
 
-1. Repositorio nuevo en GitHub, aparte del de la web personal.
-2. En Vercel, **Add New → Project**, importas ese repositorio. No hay framework
-   ni comando de build: Vercel sirve los estaticos directamente.
-3. En el proyecto de Vercel, **Settings → Domains**, anades
-   `untangled.guillemhermidarivera.com`. Vercel te dira que crees un registro
-   **CNAME** apuntando a `cname.vercel-dns.com` donde tengas el DNS del
-   dominio.
-4. Cuando el dominio este verificado, comprueba que las dos URL de arriba
-   responden. La de `app-ads.txt` tiene que salir como texto plano y sin
-   redirecciones.
+AdMob lo busca SOLO en la raiz del dominio que declares como web del
+desarrollador. Un repositorio de proyecto se sirve en `/untangled-web/`, que no
+es una raiz, asi que ahi no lo encontraria y se cobraria bastante menos.
+
+No corre prisa: eso solo importa cuando la app este publicada e ingresando, no
+para TestFlight ni para las pruebas. Cuando llegue el momento, dos salidas:
+
+1. Renombrar este repositorio a `guillehr2.github.io`, que se sirve en la raiz
+   (`https://guillehr2.github.io/app-ads.txt`). Gratis y sin DNS, pero ocupa el
+   hueco de la pagina personal de GitHub.
+2. Un subdominio propio en Vercel (`untangled.guillemhermidarivera.com`),
+   importando este mismo repositorio y anadiendo un CNAME a
+   `cname.vercel-dns.com`.
 
 ## Mantenerlo al dia
 
